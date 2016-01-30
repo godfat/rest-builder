@@ -8,13 +8,15 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Lin Jen-Shin (godfat)"]
-  s.date = "2016-01-30"
+  s.date = "2016-01-31"
   s.description = "Modular Ruby clients interface for REST APIs.\n\nBuild your own API clients for less dependencies, less codes, less memory,\nless conflicts, and run faster. Checkout [rest-core][] for pre-built\nmiddleware and [rest-more][] for pre-built clients.\n\n[rest-core]: https://github.com/godfat/rest-core\n[rest-more]: https://github.com/godfat/rest-more"
   s.email = ["godfat (XD) godfat.org"]
   s.files = [
   ".gitignore",
   ".gitmodules",
+  ".travis.yml",
   "CHANGES.md",
+  "Gemfile",
   "README.md",
   "Rakefile",
   "lib/rest-builder.rb",
