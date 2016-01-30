@@ -109,34 +109,34 @@ mage = Mage.new
 
 1. The one passed to the request directly gets the first priority, e.g.
 
-``` ruby
-mage.get('http://example.com/', {}, :hp => 1) # prints HP: 1
-```
+  ``` ruby
+  mage.get('http://example.com/', {}, :hp => 1) # prints HP: 1
+  ```
 
 2. The one saved as an instance variable in the client gets the 2nd place.
 
-``` ruby
-mage.hp = 2
-mage.get('http://example.com/')               # prints HP: 2
-mage.get('http://example.com/', {}, :hp => 1) # prints HP: 1
-mage.hp         # still 2
-mage.hp = false # disable hp
-mage.hp = nil   # reset to default
-```
+  ``` ruby
+  mage.hp = 2
+  mage.get('http://example.com/')               # prints HP: 2
+  mage.get('http://example.com/', {}, :hp => 1) # prints HP: 1
+  mage.hp         # still 2
+  mage.hp = false # disable hp
+  mage.hp = nil   # reset to default
+  ```
 
 3. The method defined in the client instance named `default_hp` gets the 3rd.
 
-``` ruby
-class Mage
-  def default_hp
-    3
+  ``` ruby
+  class Mage
+    def default_hp
+      3
+    end
   end
-end
-mage.get('http://example.com/')               # prints HP: 3
-mage.hp       # 3
-mage.hp = nil # reset default
-Mage.send(:remove_method, :default_hp)
-```
+  mage.get('http://example.com/')               # prints HP: 3
+  mage.hp       # 3
+  mage.hp = nil # reset default
+  Mage.send(:remove_method, :default_hp)
+  ```
 
 4. The method defined in the client class named `default_hp` gets the 4rd.
    P.S. In [rest-more][], with `RestCore::Config` it would generate a
@@ -144,25 +144,25 @@ Mage.send(:remove_method, :default_hp)
    then is extended into the client class. You could still define this method
    to override the default though.
 
-``` ruby
-class Mage
-  def self.default_hp
-    4
+  ``` ruby
+  class Mage
+    def self.default_hp
+      4
+    end
   end
-end
-mage.get('http://example.com/')               # prints HP: 4
-mage.hp       # 4
-mage.hp = nil # reset to default
-Mage.singleton_class.send(:remove_method, :default_hp)
-```
+  mage.get('http://example.com/')               # prints HP: 4
+  mage.hp       # 4
+  mage.hp = nil # reset to default
+  Mage.singleton_class.send(:remove_method, :default_hp)
+  ```
 
 5. The one defined in the middleware gets the last place.
 
-``` ruby
-mage.get('http://example.com/')               # prints HP: 5
-mage.hp       # 5
-mage.hp = nil # reset to default
-```
+  ``` ruby
+  mage.get('http://example.com/')               # prints HP: 5
+  mage.hp       # 5
+  mage.hp = nil # reset to default
+  ```
 
 You can find all the details in client.rb and middleware.rb. See the
 included method hooks.
