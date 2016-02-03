@@ -23,7 +23,7 @@ middleware and [rest-more][] for pre-built clients.
 
 * Modular interface for REST clients similar to WSGI/Rack for servers.
 * Concurrent requests with synchronous or asynchronous interfaces with
-  threads.
+  threads via [promise_pool][].
 
 ## WHY?
 
