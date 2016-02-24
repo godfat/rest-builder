@@ -66,6 +66,7 @@ module RestBuilder
         @onerror = cb
       else
         begin
+          Promise.set_backtrace(error)
           @onerror.call(error, sock) if @onerror
           onreconnect(error, sock)
         rescue Exception
