@@ -128,6 +128,7 @@ SSE
 
     end.onreconnect do |error, sock|
       error.should.kind_of? EOFError
+      error.backtrace.should.grep(/#{__FILE__}/).should.not.empty?
       sock.should.respond_to? :read
       !m.empty? # not empty to reconnect
 
