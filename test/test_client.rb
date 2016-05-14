@@ -179,34 +179,32 @@ describe RestBuilder::Client do
     error.should.kind_of?(Errno::ECONNREFUSED)
   end
 
-  path = 'http://example.com/'
-
   would 'give RESPONSE_BODY' do
-    stub_request(:get, path).to_return(:body => 'OK')
-    simple.new.get(path).should.eq 'OK'
+    stub_request(:get, url).to_return(:body => 'OK')
+    simple.new.get(url).should.eq 'OK'
   end
 
   would 'give RESPONSE_HEADERS' do
-    stub_request(:head, path).to_return(:headers => {'A' => 'B'})
-    simple.new.head(path).should.eq 'A' => 'B'
+    stub_request(:head, url).to_return(:headers => {'A' => 'B'})
+    simple.new.head(url).should.eq 'A' => 'B'
   end
 
   would 'give RESPONSE_HEADERS' do
-    stub_request(:get, path).to_return(:status => 199)
-    simple.new.get(path, {},
+    stub_request(:get, url).to_return(:status => 199)
+    simple.new.get(url, {},
       RestBuilder::RESPONSE_KEY => RestBuilder::RESPONSE_STATUS).should.eq 199
   end
 
   would 'give RESPONSE_SOCKET' do
-    stub_request(:get, path).to_return(:body => 'OK')
-    simple.new.get(path, {}, RestBuilder::HIJACK => true).read.should.eq 'OK'
+    stub_request(:get, url).to_return(:body => 'OK')
+    simple.new.get(url, {}, RestBuilder::HIJACK => true).read.should.eq 'OK'
   end
 
   would 'give REQUEST_URI' do
-    stub_request(:get, "#{path}?a=b").to_return(:body => 'OK')
-    simple.new.get(path, {:a => 'b'},
+    stub_request(:get, "#{url}?a=b").to_return(:body => 'OK')
+    simple.new.get(url, {:a => 'b'},
       RestBuilder::RESPONSE_KEY => RestBuilder::REQUEST_URI).
-      should.eq "#{path}?a=b"
+      should.eq "#{url}?a=b"
     simple.wait
   end
 end
