@@ -7,9 +7,9 @@ require 'webmock'
 
 WebMock.enable!
 WebMock.disable_net_connect!(:allow_localhost => true)
-Pork::Executor.include(Muack::API, WebMock::API)
+Pork::Suite.include(Muack::API, WebMock::API)
 
-class Pork::Executor
+class Pork::Suite
   def with_img
     f = Tempfile.new(['img', '.jpg'])
     n = File.basename(f.path)
