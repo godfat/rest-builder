@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Lin Jen-Shin (godfat)".freeze]
-  s.date = "2016-03-04"
+  s.date = "2016-11-17"
   s.description = "Modular Ruby clients interface for REST APIs.\n\nBuild your own API clients for less dependencies, less codes, less memory,\nless conflicts, and run faster. Checkout [rest-core][] for pre-built\nmiddleware and [rest-more][] for pre-built clients.\n\n[rest-core]: https://github.com/godfat/rest-core\n[rest-more]: https://github.com/godfat/rest-more".freeze
   s.email = ["godfat (XD) godfat.org".freeze]
   s.files = [
@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   "test/test_payload.rb".freeze]
   s.homepage = "https://github.com/godfat/rest-builder".freeze
   s.licenses = ["Apache License 2.0".freeze]
-  s.rubygems_version = "2.6.1".freeze
+  s.rubygems_version = "2.6.8".freeze
   s.summary = "Modular Ruby clients interface for REST APIs.".freeze
   s.test_files = [
   "test/test_builder.rb".freeze,
