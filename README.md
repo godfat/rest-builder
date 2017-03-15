@@ -561,7 +561,7 @@ the priority here is:
 
 ## LICENSE:
 
-Apache License 2.0
+Apache License 2.0 (Apache-2.0)
 
 Copyright (c) 2016-2017, Lin Jen-Shin (godfat)
 
