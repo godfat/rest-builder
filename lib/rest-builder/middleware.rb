@@ -1,7 +1,7 @@
 
 module RestBuilder
   module Middleware
-    METHODS_WITH_PAYLOAD = [:post, :put, :patch]
+    METHODS_WITH_PAYLOAD = [:post, :put, :patch, :delete]
 
     def self.included mod
       mod.send(:attr_reader, :app)
