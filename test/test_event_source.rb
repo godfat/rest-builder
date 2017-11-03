@@ -138,7 +138,7 @@ SSE
 
   would 'not deadlock without ErrorHandler' do
     c = RestBuilder::Builder.client.new.event_source('http://localhost:1')
-    c.onerror{ |e| e.should.kind_of?(Errno::ECONNREFUSED) }
+    c.onerror{ |e| e.should.kind_of?(SystemCallError) }
     c.start.wait
   end
 

@@ -172,11 +172,11 @@ describe RestBuilder::Client do
   would 'call error_callback' do
     error = nil
     error_callback = lambda{ |e| error = e }
-    should.raise(Errno::ECONNREFUSED) do
+    should.raise(SystemCallError) do
       simple.new(:error_callback => error_callback).
         get('http://localhost:1').tap{}
     end
-    error.should.kind_of?(Errno::ECONNREFUSED)
+    error.should.kind_of?(SystemCallError)
   end
 
   would 'give RESPONSE_BODY' do
