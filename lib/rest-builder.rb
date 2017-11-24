@@ -1,5 +1,6 @@
 
 require 'rest-builder/builder'
+require 'rest-builder/engine/identity'
 
 module RestBuilder
   REQUEST_METHOD   = 'REQUEST_METHOD'
