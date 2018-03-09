@@ -2,6 +2,7 @@
 require 'thread'
 require 'weakref'
 
+require 'rest-builder/payload'
 require 'rest-builder/promise'
 require 'rest-builder/middleware'
 require 'rest-builder/engine/dry'
@@ -200,7 +201,7 @@ module RestBuilder
       {REQUEST_METHOD  => :get,
        REQUEST_PATH    => '/' ,
        REQUEST_QUERY   => {}  ,
-       REQUEST_PAYLOAD => {}  ,
+       REQUEST_PAYLOAD => Payload::Unspecified.new,
        REQUEST_HEADERS => {}  ,
        FAIL            => []  ,
        LOG             => []  ,

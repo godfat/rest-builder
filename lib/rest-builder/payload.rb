@@ -15,6 +15,8 @@ end
 
 module RestBuilder
   class Payload
+    Unspecified = Class.new(Hash)
+
     def self.generate_with_headers payload, headers
       h = if p = generate(payload)
             p.headers.merge(headers)

@@ -207,4 +207,13 @@ describe RestBuilder::Client do
       should.eq "#{url}?a=b"
     simple.wait
   end
+
+  would 'give unspecified payload like a hash' do
+    client = RestBuilder::Builder.client{ run RestBuilder::Identity }.new
+    payload = client.get(url, {},
+      RestBuilder::RESPONSE_KEY => RestBuilder::REQUEST_PAYLOAD)
+
+    payload.should.kind_of?(Hash)
+    payload.should.kind_of?(RestBuilder::Payload::Unspecified)
+  end
 end
