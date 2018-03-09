@@ -1,8 +1,6 @@
 
 module RestBuilder
   module Middleware
-    METHODS_WITH_PAYLOAD = [:post, :put, :patch, :delete]
-
     def self.included mod
       mod.send(:attr_reader, :app)
       mem = if mod.respond_to?(:members) then mod.members else [] end
@@ -93,7 +91,9 @@ module RestBuilder
     public :escape
 
     def has_payload? env
-      METHODS_WITH_PAYLOAD.include?(env[REQUEST_METHOD])
+      payload = env[REQUEST_PAYLOAD]
+
+      !(payload.kind_of?(Payload::Unspecified) && payload.empty?)
     end
     public :has_payload?
 
