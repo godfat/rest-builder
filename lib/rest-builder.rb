@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require 'rest-builder/builder'
 require 'rest-builder/engine/identity'
