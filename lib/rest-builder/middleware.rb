@@ -91,16 +91,14 @@ module RestBuilder
     public :escape
 
     def has_payload? env
-      payload = env[REQUEST_PAYLOAD]
-
-      !(payload.kind_of?(Payload::Unspecified) && payload.empty?)
+      !unspecified_payload?(env[REQUEST_PAYLOAD])
     end
     public :has_payload?
 
     def contain_binary? payload
-      return false unless payload
-      return true  if     payload.respond_to?(:read)
-      return true  if     payload.find{ |k, v|
+      return false if unspecified_payload?(payload)
+      return true  if payload.respond_to?(:read)
+      return true  if payload.find{ |k, v|
         # if payload is an array, then v would be nil
         (v || k).respond_to?(:read) ||
         # if v is an array, it could contain binary data
@@ -109,13 +107,20 @@ module RestBuilder
     end
     public :contain_binary?
 
+    def unspecified_payload? payload
+      payload.kind_of?(Payload::Unspecified) && payload.empty?
+    end
+
     def string_keys hash
       hash.inject({}){ |r, (k, v)|
-        if v.kind_of?(Hash)
+        case v
+        when Payload::Unspecified
+          r[k.to_s] = v
+        when Hash
           r[k.to_s] = case k.to_s
-                        when REQUEST_QUERY, REQUEST_PAYLOAD, REQUEST_HEADERS
-                          string_keys(v)
-                        else;         v
+                      when REQUEST_QUERY, REQUEST_PAYLOAD, REQUEST_HEADERS
+                        string_keys(v)
+                      else;         v
                       end
         else
           r[k.to_s] = v

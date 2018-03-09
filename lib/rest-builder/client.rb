@@ -129,7 +129,7 @@ module RestBuilder
          RESPONSE_KEY    => RESPONSE_HEADERS}.merge(opts), &cb)
     end
 
-    def post   path, payload={}, query={}, opts={}, &cb
+    def post   path, payload=unspecified_payload, query={}, opts={}, &cb
       request(
         {REQUEST_METHOD  => :post  ,
          REQUEST_PATH    => path   ,
@@ -137,7 +137,7 @@ module RestBuilder
          REQUEST_PAYLOAD => payload}.merge(opts), &cb)
     end
 
-    def put    path, payload={}, query={}, opts={}, &cb
+    def put    path, payload=unspecified_payload, query={}, opts={}, &cb
       request(
         {REQUEST_METHOD  => :put   ,
          REQUEST_PATH    => path   ,
@@ -145,7 +145,7 @@ module RestBuilder
          REQUEST_PAYLOAD => payload}.merge(opts), &cb)
     end
 
-    def patch  path, payload={}, query={}, opts={}, &cb
+    def patch  path, payload=unspecified_payload, query={}, opts={}, &cb
       request(
         {REQUEST_METHOD  => :patch ,
          REQUEST_PATH    => path   ,
@@ -201,7 +201,7 @@ module RestBuilder
       {REQUEST_METHOD  => :get,
        REQUEST_PATH    => '/' ,
        REQUEST_QUERY   => {}  ,
-       REQUEST_PAYLOAD => Payload::Unspecified.new,
+       REQUEST_PAYLOAD => unspecified_payload,
        REQUEST_HEADERS => {}  ,
        FAIL            => []  ,
        LOG             => []  ,
@@ -235,6 +235,10 @@ module RestBuilder
     def response_key opts
       opts[RESPONSE_KEY] ||
         if opts[HIJACK] then RESPONSE_SOCKET else RESPONSE_BODY end
+    end
+
+    def unspecified_payload
+      Payload::Unspecified.new
     end
 
     def lighten_hash hash

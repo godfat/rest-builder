@@ -210,10 +210,17 @@ describe RestBuilder::Client do
 
   would 'give unspecified payload like a hash' do
     client = RestBuilder::Builder.client{ run RestBuilder::Identity }.new
-    payload = client.get(url, {},
-      RestBuilder::RESPONSE_KEY => RestBuilder::REQUEST_PAYLOAD)
 
-    payload.should.kind_of?(Hash)
-    payload.should.kind_of?(RestBuilder::Payload::Unspecified)
+    [:get, :head, :options, :post, :put, :patch, :delete].each do |meth|
+      mock(client.app).call.with_any_args.peek_args do |env|
+        payload = env[RestBuilder::REQUEST_PAYLOAD]
+        expect(payload).kind_of?(Hash)
+        expect(payload).kind_of?(RestBuilder::Payload::Unspecified)
+
+        [env]
+      end
+
+      client.public_send(meth, url)
+    end
   end
 end

@@ -16,9 +16,14 @@ describe RestBuilder::HttpClient do
     ok   = 'OK'
     c    = client.new
 
-    post = lambda do |payload, body|
+    stub_request = lambda do |body|
       WebMock::API.stub_request(:post, path).
         with(:body => body).to_return(:body => ok)
+    end
+
+    post = lambda do |payload, body|
+      stub_request[body]
+
       c.post(path, payload).should.eq ok
     end
 
@@ -41,6 +46,12 @@ describe RestBuilder::HttpClient do
       post[rd, 'socket']
     end
 
+    would 'post without payload' do
+      stub_request[nil]
+
+      c.post(path).should.eq ok
+    end
+
     would 'not kill the thread if error was coming from the task' do
       mock(HTTPClient).new{ raise 'boom' }.with_any_args
       c.request(RestBuilder::ASYNC => true).message.should.eq 'boom'
@@ -51,13 +62,13 @@ describe RestBuilder::HttpClient do
       server = TCPServer.new(0)
       t = Thread.new do
         client = server.accept
-        client.write(<<-HTTP)
-HTTP/1.0 200 OK\r
-Connection: close\r
-Content-Encoding: deflate\r
-\r
-#{body}\r
-          HTTP
+        client.write(<<~HTTP)
+          HTTP/1.0 200 OK\r
+          Connection: close\r
+          Content-Encoding: deflate\r
+          \r
+          #{body}\r
+        HTTP
         client.close_write
       end
 
