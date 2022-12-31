@@ -8,13 +8,13 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Lin Jen-Shin (godfat)".freeze]
-  s.date = "2018-12-26"
+  s.date = "2022-12-31"
   s.description = "Modular Ruby clients interface for REST APIs.\n\nBuild your own API clients for less dependencies, less codes, less memory,\nless conflicts, and run faster. Checkout [rest-core][] for pre-built\nmiddleware and [rest-more][] for pre-built clients.\n\n[rest-core]: https://github.com/godfat/rest-core\n[rest-more]: https://github.com/godfat/rest-more".freeze
   s.email = ["godfat (XD) godfat.org".freeze]
   s.files = [
   ".gitignore".freeze,
+  ".gitlab-ci.yml".freeze,
   ".gitmodules".freeze,
-  ".travis.yml".freeze,
   "CHANGES.md".freeze,
   "Gemfile".freeze,
   "README.md".freeze,
@@ -47,7 +47,7 @@ Gem::Specification.new do |s|
   "test/test_payload.rb".freeze]
   s.homepage = "https://github.com/godfat/rest-builder".freeze
   s.licenses = ["Apache-2.0".freeze]
-  s.rubygems_version = "3.0.1".freeze
+  s.rubygems_version = "3.4.1".freeze
   s.summary = "Modular Ruby clients interface for REST APIs.".freeze
   s.test_files = [
   "test/engine/test_dry.rb".freeze,
@@ -60,21 +60,9 @@ Gem::Specification.new do |s|
   "test/test_middleware.rb".freeze,
   "test/test_payload.rb".freeze]
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 4
+  s.specification_version = 4
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<promise_pool>.freeze, [">= 0"])
-      s.add_runtime_dependency(%q<httpclient>.freeze, [">= 0"])
-      s.add_runtime_dependency(%q<mime-types>.freeze, [">= 0"])
-    else
-      s.add_dependency(%q<promise_pool>.freeze, [">= 0"])
-      s.add_dependency(%q<httpclient>.freeze, [">= 0"])
-      s.add_dependency(%q<mime-types>.freeze, [">= 0"])
-    end
-  else
-    s.add_dependency(%q<promise_pool>.freeze, [">= 0"])
-    s.add_dependency(%q<httpclient>.freeze, [">= 0"])
-    s.add_dependency(%q<mime-types>.freeze, [">= 0"])
-  end
+  s.add_runtime_dependency(%q<promise_pool>.freeze, [">= 0"])
+  s.add_runtime_dependency(%q<httpclient>.freeze, [">= 0"])
+  s.add_runtime_dependency(%q<mime-types>.freeze, [">= 0"])
 end
