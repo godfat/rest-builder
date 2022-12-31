@@ -1,6 +1,6 @@
 # rest-builder [![Pipeline status](https://gitlab.com/godfat/rest-builder/badges/master/pipeline.svg)](https://gitlab.com/godfat/rest-builder/-/pipelines)
 
-by Lin Jen-Shin ([godfat](http://godfat.org))
+by Lin Jen-Shin ([godfat](https://godfat.org))
 
 ## LINKS:
 
