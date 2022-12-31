@@ -6,7 +6,7 @@ by Lin Jen-Shin ([godfat](https://godfat.org))
 
 * [github](https://github.com/godfat/rest-builder)
 * [rubygems](https://rubygems.org/gems/rest-builder)
-* [rdoc](http://rdoc.info/projects/godfat/rest-builder)
+* [rdoc](https://rubydoc.info/github/godfat/rest-builder/master)
 * [issues](https://github.com/godfat/rest-builder/issues) (feel free to ask for support)
 
 ## DESCRIPTION:
