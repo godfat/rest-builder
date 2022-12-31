@@ -8,7 +8,7 @@ stages:
   variables:
     GIT_DEPTH: "1"
     GIT_SUBMODULE_STRATEGY: recursive
-    GIT_SUBMODULE_PATHS: task
+    GIT_SUBMODULE_PATHS: task promise_pool
     # httpclient does not work with frozen string literal
     # RUBYOPT: --enable-frozen-string-literal
   before_script:
